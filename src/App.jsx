@@ -48,7 +48,7 @@ function App() {
         () =>
             debounce((value) => {
                 setSearchTerm(value);
-            }, 800),
+            }, 600),
         []
     );
 
@@ -61,7 +61,6 @@ function App() {
         isLoading: isLoadingGetApi,
         isError,
         error,
-        isSuccess,
     } = useGetWeatherQuery(
         { city: searchTerm },
         {
@@ -83,10 +82,9 @@ function App() {
                 showMessage({ isShowMessage: true, typeMessage: "error", contentMessage: error?.data?.error?.message })
             );
         }
-        if (isSuccess) {
-            dispatch(showMessage({ isShowMessage: true, typeMessage: "success", contentMessage: "Success" }));
-        }
-    }, [dispatch, isError, error?.data?.error?.message, isSuccess]);
+    }, [dispatch, isError, error?.data?.error?.message]);
+
+    // useEffect(() => {}, [dispatch, isSuccess, isError]);
 
     const dataCurrent = useSelector((state) => state.current);
 
