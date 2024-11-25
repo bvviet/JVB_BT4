@@ -68,6 +68,12 @@ function App() {
         }
     );
 
+    const handleKeyDown = (e) => {
+        if (e.key === "Enter") {
+            handleSearch();
+        }
+    };
+
     useEffect(() => {
         if (isLoadingGetApi) {
             dispatch(startLoading(true));
@@ -94,22 +100,19 @@ function App() {
                 <div className="flex items-center justify-center h-screen w-auto text-sm">
                     <div className="border-8 border-[#a0cdd638] shadow-xl rounded-lg px-6 py-10 w-[65vw] flex">
                         <div className="w-[30%]">
-                            <form>
-                                <Space direction="horizontal" size="small">
-                                    <label htmlFor="city" className="font-medium">
-                                        Your city
-                                    </label>
-                                    <Input
-                                        placeholder={`${
-                                            data?.location.name ? data?.location.name : "Search name City"
-                                        }`}
-                                        id="city"
-                                        size="small"
-                                        className="w-32"
-                                        onChange={handleSearch}
-                                    />
-                                </Space>
-                            </form>
+                            <Space direction="horizontal" size="small">
+                                <label htmlFor="city" className="font-medium">
+                                    Your city
+                                </label>
+                                <Input
+                                    placeholder={`${data?.location.name ? data?.location.name : "Search name City"}`}
+                                    id="city"
+                                    size="small"
+                                    className="w-32"
+                                    onChange={handleSearch}
+                                    onKeyDown={handleKeyDown}
+                                />
+                            </Space>
                             <div className="p-3 pb-0 w-full mt-1">
                                 <div className="px-4">
                                     <p className="mb-2 font-semibold">
